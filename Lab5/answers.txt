@@ -1,0 +1,18 @@
+E/16/083
+
+1.  
+    a.  nondestructive_editTask function in task_server.py
+
+    b.  destructive_editTask function  in task_server.py
+
+2.  
+    c.  taskstate-fsm.pdf
+
+    d.   editTask function  in task_server.py
+
+    e.  Yes.
+        For an example consider a task which is in the OPEN state. Then one client may try to set the state to ASSIGNED while another client may try to set the state to CANCELLED.
+        Here the client who updates the state at first will set the state properly but due to this race condition, next immediate client will ended up with illegal transition.
+
+        
+3.  listTasks function  in task_server.py

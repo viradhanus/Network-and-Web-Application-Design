@@ -1,0 +1,75 @@
+E/16/083
+
+1).
+
+a.What is the response code you received?
+
+    200
+
+b.What is the web server and OS used to host this site? Hint: look at the headers stored in response.headers.items().
+
+    Web server :- Apache/2.4.35 (FreeBSD) OpenSSL/1.0.1s-freebsd PHP/5.6.38
+    OS :- FreeBSD
+
+c.What is the size of the response body?
+
+    54123 bytes
+
+d.Read the response body into a variable named ‘body’. What is the Python type of the ‘body’ variable?
+
+    <class 'bytes'>
+
+e.Explain why ‘body’ has that particular type with reference to the structure of HTTP responses.
+    
+    HTTP responses are not only texts but also can be images, audios, videos etc. Since the 'body' variable is of type 'byte' it can be converted any of the above mentioned HTTP responses forms.
+
+f.What happens if you request the URL “http://eng.pdn.ac.lk/unknown" ? What about  “http://unknown.pdn.ac.lk"?
+
+    For URL “http://eng.pdn.ac.lk/unknown" it throws urllib.error.HTTPError which is 'HTTP Error 404'. This indicates where the host server is available, but the requested data is not available.
+
+    For URL “http://unknown.pdn.ac.lk" it throws urllib.error.URLError which is '<urlopen error [Errno -2] Name or service not known>'. This indicates that the server IP address could not be found.
+
+g.Request the following URL and store the response body in a variable ‘body’. https://ta.wikipedia.org/wiki/%E0%AE%9A%E0%AE%BF%E0%AE%99%E0%AF%8D%E0%AE%95%E0%AE%B3%E0%AE%AE%E0%AF%8D. Try printing the body data.
+
+    consider the bellow code.
+
+    response_g = request.urlopen("https://ta.wikipedia.org/wiki/%E0%AE%9A%E0%AE%BF%E0%AE%99%E0%AF%8D%E0%AE%95%E0%AE%B3%E0%AE%AE%E0%AF%8D")
+    body_g = response_g.read()
+    print(body_g)
+
+
+h.What difference do you see  if you call the method .decode(“utf-8”) on the body data received in (g) before printing it?
+
+    consider the bellow code.
+    
+    body_h = body_g.decode("utf-8")
+    print(body_h)
+
+    When we decode it (g) with 'utf-8', data type changes to json. 
+
+2).
+
+i.Append the string “&format=json&pretty=1” to the search query. What difference do you see in the response?
+    Response changes to json
+
+j. Use request.urlopen to search for the phrase “Rocco's basilisk”. Hint: try it  in your browser first and look at the request URL carefully.
+
+    response = request.urlopen("https://www.duckduckgo.com/?q=Rocco%27s+basilisk")
+
+k.What is URL encoding/decoding? Why is it necessary?
+
+    URL encoding is encoding certain characters in a URL by replacing them with one or more character triplets that consist of the percent character "%" followed by two hexadecimal digits. The two hexadecimal digits of the triplet(s) represent the numeric value of the replaced character.
+    URL decoding is converting encoded URLs to human-readable format.
+
+    URL Encoding is necessary since it converts reserved, unsafe, and non-ASCII characters in URLs to a format that is universally accepted and understood by all web browsers and servers. 
+
+l.How would you do a DDG search in Python for your name written in Tamil or Sinhala? Use this for Unicode input https://www.lexilogos.com/keyboard/.
+
+    response = request.urlopen("https://duckduckgo.com/?q=%E0%B7%80%E0%B7%92%E0%B6%BB%E0%B7%8F%E0%B6%A2%E0%B7%8A+%E0%B6%B0%E0%B6%B1%E0%B7%94%E0%B7%82%E0%B7%8A%E0%B6%9A&t=hk&ia=web")
+
+
+3).
+
+c.How can you avoid downloading the response bodies? Hint: Use the appropriate HTTP method
+
+To avoid downloading the response bodies, we may make HEAD request to a web page and return the HTTP headers.

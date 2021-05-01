@@ -1,0 +1,40 @@
+E/16/083
+
+1).
+
+a. 
+
+We have the endpoints of the Github api.
+
+
+c.  
+
+X-RateLimit-Limit corresponds to the maximum number of requests that the user is permitted to make per hour. X-RateLimit-Remaining corresponds to the number of requests remaining in the current rate limit window. X-RateLimit-Reset corresponds to the time at which the current rate limit window resets in UTC epoch seconds.
+
+Here for unauthenticated requests, the rate limit allows for up to 60 requests per hour and 5000 requests per hour when they authenticate with different tokens owned by the same user.
+
+
+d. To access restricted operations via the API, you need to authenticate yourself first. Explain what effect the following code has at the HTTP protocol level, when a request is made using that session.
+
+A token can be used to give access to restricted operations and the 'Session' object allows us to persist certain parameters across requests. It persists cookies across all requests made from the Session instance as well. Hence, if we making several requests to the same host, the underlying TCP connection will be reused.(HTTP persistent connection/HTTP connection reuse) 
+
+2).
+
+c.  To request the version we can use the Accept header
+
+To request the version v3, the code is as follows.
+
+with requests.Session() as session:
+    session.headers['Accept'] = 'application/vnd.github.v3+json'
+
+To request the version v4, the code is as follows.
+
+with requests.Session() as session:
+    session.headers['Accept'] = 'application/vnd.github.v4+json'
+
+
+d.
+
+A REST API is an architectural concept for network-based software. But GraphQL is a query language, a specification, and a set of tools that operates over a single endpoint using HTTP. Mainly REST has been used to make new APIs, the focus of GraphQL has been to optimize for performance and flexibility.
+
+REST APIs have shown to be too inflexible to keep up with the rapidly changing requirements of the clients that access them.When using a REST API to fetch information, we will always get back a complete dataset. For example, if we wanted to request information from two objects, we would need to perform two REST API requests. GraphQL uses its query language to tailor the request to exactly what we need, from multiple objects down to specific fields within each entity. Therefore it doesn't overfetch data. Since GraphQL was developed to deal with the need for more flexibility and efficiency, it solves many of such shortcomings and inefficiencies that developers experience when interacting with REST APIs.

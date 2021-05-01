@@ -1,0 +1,7 @@
+E/16/083
+
+3)
+b. Can we use a two-element list [surname, given_name] as the key? Explain why.
+
+NO.
+dict keys need to be hashable(can be converted to hash). Lists are Mutable and they do not provide a valid __hash__ method.

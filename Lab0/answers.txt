@@ -1,0 +1,14 @@
+1)
+a.What does the “with” keyword do?
+The with statement provides a way for ensuring that a clean-up is always used. Here  it will automatically close the file as well.
+
+b.What is the return type of this function?
+tuple
+
+2)
+c.What does the zip() function return? (hint: try printing combined)
+zip function takes in iterables(here lists) as arguments and returns an iterator. This iterator generates a series of tuples containing elements from each iterable.
+
+d.What do you get if you reverse the arguments to zip? (zip(logins, ids))
+Both elements in every list item gets interchange.
+

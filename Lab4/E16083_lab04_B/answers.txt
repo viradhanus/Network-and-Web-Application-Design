@@ -1,0 +1,39 @@
+E/16/083
+
+1.State whether each Task API operation is idempotent along with an explanation.
+
+addTask - not idempotent since if we execute addTask many times for same discription as parameter, it will create different tasks since server assings different ids for each task. Hence the result will modify the server for each execution.
+
+delTask - idempotent since after particular task is deleted, executing this operarion multiple times for the same id will not modify anything in the server.
+
+editTask - idempotent since after particular task is edited, executing this operarion multiple times for same parameters(id and description) will not modify anything in the server.
+
+listTasks - idempotent since when executing this multiple times it gives the same result (unless the tasklist is not modified by another method execution) it does not modify anything in the server.
+
+3.Why is it necessary to implement the checks stated above?
+
+"Task descriptions must be less than MAXLEN=1024 characters" - this prevents the server from Denial-of-Service attacks.
+
+"Task IDs must be valid" -  this ensures user trying to modify the tasks which are not exist
+
+6.What happens if editTask is called on the same task by two clients simultaneously? Suggest a possible solution
+
+One of the update might be lost.
+We can use synchronization.
+
+7.There is a subtle error in the provided implementation of addTask called a data race. How can we fix this problem?
+
+Here the error is that both tasks might ended up with having a same task id.
+Using a mutex we can get rid of such problems.
+
+8.(Exam hint) A student writes the following code to prevent the data race in addTask. Explain why this does not ensure mutual exclusion.
+
+If there is a shared data structure(variable) in a programme(here it is tasks dictationary), all threads are sharing access to that shared data structure(variable).Hence, we should prevent shared variable being modified unless it might lead to data races. We can use mutexes to prevent shared variables being modified.
+
+In this implementation when threads are operating addTask same time, it will create locks seperately. Hence it will not execute addTask in one thread after the other. Hence it will lead to data races.Therefore we should create a single lock as global object to avoid data races.
+
+10.Does code in listTasks need to be in a critical section? Explain why (not?)
+
+It depends with the implementation.
+But here it is better to do so since if one thread is executing listTasks and at the same time if another thread begins to execute addTask, we might ended up with having some garbage values.
+as for the result of listTasks.

@@ -1,0 +1,5 @@
+samantha,manage,CO224,CO221
+samanthi,gamage,CO226,GP106,CO222
+saman,lokuge,CO221,GP106,CO222
+Teshan,gamage,CO222,GP106,CO221
+Vihanga,manage,CO223,CO221
